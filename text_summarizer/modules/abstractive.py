@@ -1,32 +1,5 @@
-"""
-================================================================================
-ABSTRACTIVE SUMMARIZATION MODULE
-================================================================================
-Integrasi dengan Google Gemini API untuk abstractive summarization
-
-Author: Member 1 - NLP & Backend Engineer
-Phase: 2 (Core Summarization)
-
-Perbedaan Extractive vs Abstractive:
-    - Extractive: Memilih kalimat penting dari teks asli (copy-paste)
-    - Abstractive: Generate kalimat baru yang merangkum isi teks (paraphrase)
-
-Features:
-    - Integrasi Gemini API
-    - Prompt engineering untuk summary berkualitas
-    - Multiple summary styles (concise, detailed, bullet)
-
-Classes:
-    - GeminiSummarizer: Class utama untuk abstractive summarization
-
-Usage:
-    from modules.abstractive import GeminiSummarizer
-    
-    summarizer = GeminiSummarizer()
-    result = summarizer.summarize(text, max_sentences=5)
-    print(result['summary'])
-================================================================================
-"""
+# Modul abstractive summarization — generate ringkasan baru pakai Gemini API
+# (beda sama extractive yang copy-paste kalimat asli, ini bikin kalimat baru)
 
 import google.generativeai as genai
 from dotenv import load_dotenv
@@ -38,34 +11,10 @@ load_dotenv()
 
 
 class GeminiSummarizer:
-    """
-    Abstractive summarization menggunakan Google Gemini API
-    
-    Gemini adalah Large Language Model (LLM) dari Google yang dapat
-    memahami dan menghasilkan teks dengan kualitas tinggi.
-    """
-    
+    # Class utama untuk generate summary pakai Gemini LLM
+
     def __init__(self, model_name='models/gemini-2.5-flash'):
-        """
-        Inisialisasi Gemini summarizer
-        
-        Args:
-            model_name (str): Nama model Gemini yang digunakan
-                            (default: 'models/gemini-2.5-flash')
-                            
-        Note:
-            Model yang tersedia (Februari 2026):
-            - 'models/gemini-2.5-flash' (recommended - fast)
-            - 'models/gemini-2.5-pro' (high quality)
-            - 'models/gemini-flash-latest' (always latest)
-            
-            Deprecated models (NOT AVAILABLE):
-            - gemini-1.5-flash, gemini-1.5-pro, gemini-pro
-        
-        Raises:
-            ValueError: Jika API key tidak ditemukan
-        """
-        # Ambil API key dari environment variable
+        # Inisialisasi: ambil API key dari .env, lalu connect ke model Gemini
         api_key = os.getenv('GEMINI_API_KEY')
         if not api_key:
             raise ValueError(
@@ -74,18 +23,11 @@ class GeminiSummarizer:
                 "GEMINI_API_KEY=your_api_key_here"
             )
         
-        # Configure Gemini API
         genai.configure(api_key=api_key)
-        
-        # Initialize model
         self.model = genai.GenerativeModel(model_name)
         self.model_name = model_name
         
         print(f"[OK] Gemini Summarizer initialized: {model_name}")
-    
-    # ========================================================================
-    # PROMPT ENGINEERING
-    # ========================================================================
     
     def create_summary_prompt(
         self, 
@@ -93,25 +35,8 @@ class GeminiSummarizer:
         max_sentences: int = 5,
         style: str = "concise"
     ) -> str:
-        """
-        Membuat prompt yang optimal untuk summarization
-        
-        Prompt Engineering Tips:
-            - Clear instruction: Jelaskan task dengan jelas
-            - Context: Berikan konteks tentang teks
-            - Format: Spesifikasikan format output yang diinginkan
-            - Constraints: Batasan seperti panjang summary
-            - Quality criteria: Kriteria kualitas (concise, coherent, dll)
-        
-        Args:
-            text (str): Teks yang akan dirangkum
-            max_sentences (int): Maximum kalimat dalam summary
-            style (str): Style summary ('concise', 'detailed', 'bullet')
-            
-        Returns:
-            str: Formatted prompt untuk Gemini
-        """
-        # Definisi style instructions
+        # Bikin prompt yang dikirim ke Gemini — atur style (concise/detailed/bullet)
+        # dan batasan jumlah kalimat output
         style_instructions = {
             'concise': "Buat ringkasan yang singkat dan padat (concise).",
             'detailed': "Buat ringkasan yang komprehensif dan detail.",
@@ -120,7 +45,6 @@ class GeminiSummarizer:
         
         instruction = style_instructions.get(style, style_instructions['concise'])
         
-        # Construct prompt
         prompt = f"""Kamu adalah expert text summarizer. Tugas kamu adalah membuat ringkasan berkualitas tinggi dari teks berikut.
 
 Instruksi:
@@ -138,10 +62,6 @@ Ringkasan:"""
         
         return prompt
     
-    # ========================================================================
-    # MAIN SUMMARIZATION FUNCTION
-    # ========================================================================
-    
     def summarize(
         self, 
         text: str, 
@@ -149,61 +69,28 @@ Ringkasan:"""
         style: str = "concise",
         temperature: float = 0.3
     ) -> Dict:
-        """
-        Generate abstractive summary menggunakan Gemini API
-        
-        Args:
-            text (str): Input text yang akan dirangkum
-            max_sentences (int): Maximum kalimat dalam summary (default: 5)
-            style (str): Summary style - 'concise', 'detailed', atau 'bullet'
-            temperature (float): Kreativitas model (0.0-1.0)
-                               - 0.0: Sangat deterministik
-                               - 1.0: Sangat kreatif/random
-                               - Recommended: 0.3 untuk summarization
-            
-        Returns:
-            dict: Dictionary berisi:
-                - summary: String summary yang dihasilkan
-                - model: Nama model yang digunakan
-                - style: Style yang digunakan
-                - success: Boolean apakah berhasil atau tidak
-                - error: Error message (jika ada)
-                
-        Example:
-            >>> summarizer = GeminiSummarizer()
-            >>> result = summarizer.summarize(
-            ...     text="Long article...",
-            ...     max_sentences=3,
-            ...     style="concise"
-            ... )
-            >>> if result['success']:
-            ...     print(result['summary'])
-        """
+        # Fungsi utama: kirim teks ke Gemini dan return hasilnya sebagai dict
+        # temperature rendah (0.3) biar outputnya konsisten, bukan random
         try:
             print(f" Generating abstractive summary dengan Gemini...")
             print(f"   Model: {self.model_name}")
             print(f"   Style: {style}")
             print(f"   Max sentences: {max_sentences}")
             
-            # STEP 1: Create optimized prompt
             prompt = self.create_summary_prompt(text, max_sentences, style)
             
-            # STEP 2: Configure generation parameters
             generation_config = genai.types.GenerationConfig(
-                temperature=temperature,      # Kontrolkreativitas
-                max_output_tokens=1024,      # Max panjang output
+                temperature=temperature,
+                max_output_tokens=1024,
             )
             
-            # STEP 3: Generate summary
             response = self.model.generate_content(
                 prompt,
                 generation_config=generation_config
             )
             
-            # STEP 4: Extract summary dari response
             summary = response.text.strip()
             
-            # Log hasil
             print(f"   [OK] Summary berhasil di-generate!")
             print(f"    Panjang summary: {len(summary)} karakter")
             
@@ -215,7 +102,6 @@ Ringkasan:"""
             }
             
         except Exception as e:
-            # Handle error
             print(f"   [ERROR] Error saat generate summary: {e}")
             return {
                 'summary': "",
@@ -225,25 +111,12 @@ Ringkasan:"""
                 'error': str(e)
             }
     
-    # ========================================================================
-    # COMPARISON FUNCTION
-    # ========================================================================
-    
     def compare_summaries(
         self, 
         text: str, 
         extractive_summary: str
     ) -> Dict:
-        """
-        Generate abstractive summary dan compare dengan extractive summary
-        
-        Args:
-            text (str): Original text
-            extractive_summary (str): Extractive summary untuk comparison
-            
-        Returns:
-            dict: Comparison results
-        """
+        # Bandingin hasil abstractive vs extractive — return keduanya sekaligus
         # Generate abstractive summary
         abstractive_result = self.summarize(text)
         
@@ -262,35 +135,18 @@ Ringkasan:"""
         }
 
 
-# ============================================================================
-# CONVENIENCE FUNCTION
-# ============================================================================
-
+# Shortcut function — langsung return string summary tanpa perlu bikin object dulu
 def abstractive_summary_gemini(
     text: str, 
     max_sentences: int = 5,
     style: str = "concise"
 ) -> str:
-    """
-    Fungsi convenience untuk generate abstractive summary
-    
-    Args:
-        text (str): Input text
-        max_sentences (int): Maximum kalimat
-        style (str): Summary style
-        
-    Returns:
-        str: Summary text (empty string jika error)
-    """
     summarizer = GeminiSummarizer()
     result = summarizer.summarize(text, max_sentences, style)
     return result['summary'] if result['success'] else ""
 
 
-# ============================================================================
-# TESTING CODE
-# ============================================================================
-
+# Blok testing — jalan kalau file ini dirun langsung (bukan di-import)
 if __name__ == "__main__":
     print("="*80)
     print("ABSTRACTIVE SUMMARIZATION (Gemini) - TEST")

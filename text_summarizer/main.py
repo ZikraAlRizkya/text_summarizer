@@ -1,26 +1,5 @@
-"""
-================================================================================
-MAIN CLI - TEXT SUMMARIZATION TOOL
-================================================================================
-Command-line interface yang mengintegrasikan semua module untuk complete
-summarization pipeline
-
-Author: Member 1 - NLP & Backend Engineer
-Phase: 2 (Core Summarization)
-
-Pipeline:
-    1. Read file (TXT/PDF)
-    2. Preprocessing (cleaning, tokenization)
-    3. Extractive summarization (TextRank)
-    4. Abstractive summarization (Gemini)
-    5. Display & save results
-
-Usage:
-    python main.py data/sample.txt
-    python main.py data/document.pdf --ratio 0.4
-    python main.py data/article.txt --sentences 5 --style detailed
-================================================================================
-"""
+# CLI utama — jalanin full pipeline: baca file → preprocessing → extractive → abstractive → simpan hasil
+# Usage: python main.py data/sample.txt --ratio 0.4 --style detailed
 
 import argparse
 import os
@@ -41,40 +20,27 @@ from modules.abstractive import GeminiSummarizer
 # ============================================================================
 
 def print_header(title):
-    """Print section header"""
+    # Print header section dengan garis separator
     print("\n" + "="*80)
     print(title.center(80))
     print("="*80)
 
 
 def print_section(title):
-    """Print sub-section"""
+    # Print sub-section header
     print(f"\n{title}")
     print("-"*80)
 
 
 def save_summary(original_text, extractive_summary, abstractive_summary, output_file=None):
-    """
-    Menyimpan hasil summary ke file
-    
-    Args:
-        original_text (str): Teks asli
-        extractive_summary (str): Extractive summary
-        abstractive_summary (str): Abstractive summary
-        output_file (str): Path output file (optional)
-        
-    Returns:
-        str: Path file yang disimpan
-    """
-    # Generate filename jika tidak dispesifikasikan
+    # Simpan hasil summary ke file .txt di folder output/
+    # kalau output_file tidak dispesifikasikan, auto-generate nama pakai timestamp
     if output_file is None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         output_file = f"output/summary_{timestamp}.txt"
     
-    # Ensure output directory exists
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
-    # Write to file
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write("="*80 + "\n")
         f.write("TEXT SUMMARIZATION RESULTS\n")
@@ -105,17 +71,7 @@ def save_summary(original_text, extractive_summary, abstractive_summary, output_
 # ============================================================================
 
 def main():
-    """
-    Main CLI function
-    
-    Menjalankan complete summarization pipeline:
-        1. Parse arguments
-        2. Read file
-        3. Preprocess
-        4. Extractive summarization
-        5. Abstractive summarization
-        6. Display & save results
-    """
+    # Entry point CLI — parse argumen, jalanin pipeline, tampilkan & simpan hasil
     
     # ========================================================================
     # SETUP ARGUMENT PARSER

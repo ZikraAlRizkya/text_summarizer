@@ -1,30 +1,5 @@
-"""
-================================================================================
-EXTRACTIVE SUMMARIZATION MODULE
-================================================================================
-Implementasi algoritma TextRank untuk extractive summarization
-
-Author: Member 1 - NLP & Backend Engineer
-Phase: 2 (Core Summarization)
-
-Algorithm: TextRank (PageRank untuk teks)
-    1. Hitung similarity matrix antar kalimat (TF-IDF + Cosine Similarity)
-    2. Buat graph dari similarity matrix
-    3. Apply PageRank algorithm untuk ranking kalimat
-    4. Pilih top-N kalimat dengan ranking tertinggi
-    5. Return summary dalam urutan asli
-
-Classes:
-    - TextRankSummarizer: Class utama untuk extractive summarization
-
-Usage:
-    from modules.extractive import TextRankSummarizer
-    
-    summarizer = TextRankSummarizer()
-    result = summarizer.summarize(text=text, ratio=0.3)
-    print(result['summary'])
-================================================================================
-"""
+# Modul extractive summarization — milih kalimat paling penting dari teks asli
+# pakai algoritma TextRank (versi PageRank buat teks)
 
 import numpy as np
 import networkx as nx
@@ -34,133 +9,53 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 class TextRankSummarizer:
-    """
-    TextRank-based extractive summarization
-    
-    TextRank menggunakan graph-based ranking algorithm (mirip Google PageRank)
-    untuk menentukan kalimat mana yang paling penting dalam sebuah teks.
-    """
-    
+    # Class utama untuk extractive summarization pakai TextRank
+
     def __init__(self, similarity_threshold=0.1):
-        """
-        Inisialisasi TextRank summarizer
-        
-        Args:
-            similarity_threshold (float): Threshold minimum untuk membuat edge
-                                         dalam graph (default: 0.1)
-        """
+        # threshold: batas minimum similarity supaya dua kalimat dianggap terhubung di graph
         self.similarity_threshold = similarity_threshold
     
-    # ========================================================================
-    # STEP 1: COMPUTE SIMILARITY MATRIX
-    # ========================================================================
-    
     def compute_similarity_matrix(self, sentences: List[str]) -> np.ndarray:
-        """
-        Menghitung similarity matrix antar kalimat menggunakan TF-IDF dan
-        cosine similarity
-        
-        Penjelasan:
-            - TF-IDF: Representasi kalimat dalam bentuk vektor berdasarkan
-                     frekuensi kata (Term Frequency - Inverse Document Frequency)
-            - Cosine Similarity: Mengukur seberapa mirip dua kalimat
-        
-        Args:
-            sentences (List[str]): List of sentences
-            
-        Returns:
-            np.ndarray: Similarity matrix (N x N) dimana N = jumlah kalimat
-                       matrix[i][j] = similarity antara kalimat i dan j
-        """
+        # Ubah tiap kalimat jadi vektor TF-IDF, lalu hitung cosine similarity antar kalimat
+        # Hasilnya matrix N x N, nilai[i][j] = seberapa mirip kalimat i dan j
         if len(sentences) < 2:
             return np.array([[1.0]])
         
         try:
-            # Buat TF-IDF matrix
-            # TF-IDF mengubah kalimat menjadi vektor numerik
             vectorizer = TfidfVectorizer()
             tfidf_matrix = vectorizer.fit_transform(sentences)
-            
-            # Hitung cosine similarity
-            # Cosine similarity mengukur sudut antara dua vektor
-            # Nilai 1 = sangat mirip, nilai 0 = tidak mirip
             similarity_matrix = cosine_similarity(tfidf_matrix, tfidf_matrix)
-            
             return similarity_matrix
             
         except Exception as e:
             print(f"[ERROR] Error saat menghitung similarity matrix: {e}")
-            # Fallback: return identity matrix (diagonal = 1, sisanya = 0)
             n = len(sentences)
             return np.eye(n)
     
-    # ========================================================================
-    # STEP 2: BUILD GRAPH
-    # ========================================================================
-    
     def build_similarity_graph(self, similarity_matrix: np.ndarray) -> nx.Graph:
-        """
-        Membuat graph dari similarity matrix
-        
-        Penjelasan:
-            - Node: Setiap kalimat adalah node
-            - Edge: Dua kalimat terhubung jika similarity > threshold
-            - Weight: Bobot edge = nilai similarity
-        
-        Args:
-            similarity_matrix (np.ndarray): Matrix similarity
-            
-        Returns:
-            nx.Graph: Graph dengan weighted edges
-        """
+        # Bikin graph: tiap kalimat jadi node, dua kalimat dihubungkan edge
+        # kalau similarity-nya di atas threshold
         n = similarity_matrix.shape[0]
         graph = nx.Graph()
-        
-        # Tambahkan nodes (kalimat)
         graph.add_nodes_from(range(n))
         
-        # Tambahkan edges dengan weights
         for i in range(n):
             for j in range(i + 1, n):
                 similarity = similarity_matrix[i][j]
-                # Hanya tambahkan edge jika similarity > threshold
                 if similarity > self.similarity_threshold:
                     graph.add_edge(i, j, weight=similarity)
         
         return graph
     
-    # ========================================================================
-    # STEP 3: RANK SENTENCES
-    # ========================================================================
-    
     def rank_sentences(self, graph: nx.Graph) -> Dict[int, float]:
-        """
-        Ranking kalimat menggunakan PageRank algorithm
-        
-        Penjelasan PageRank:
-            - Algoritma yang digunakan Google untuk ranking web pages
-            - Idea: Halaman penting jika banyak halaman penting yang link ke dia
-            - Dalam konteks teks: Kalimat penting jika mirip dengan banyak
-              kalimat penting lainnya
-        
-        Args:
-            graph (nx.Graph): Similarity graph
-            
-        Returns:
-            dict: Dictionary {index_kalimat: score}
-        """
+        # Jalanin PageRank di graph — kalimat yang banyak terhubung ke kalimat penting
+        # dapat score tinggi (sama kayak cara Google ranking halaman web)
         try:
-            # Apply PageRank algorithm
             scores = nx.pagerank(graph, weight='weight')
             return scores
         except:
-            # Fallback: uniform scores jika PageRank gagal
             print("[WARNING]  Warning: PageRank failed, menggunakan uniform scores")
             return {i: 1.0 for i in graph.nodes()}
-    
-    # ========================================================================
-    # STEP 4: SELECT TOP SENTENCES
-    # ========================================================================
     
     def select_top_sentences(
         self, 
@@ -170,21 +65,8 @@ class TextRankSummarizer:
         ratio: float = 0.3,
         ensure_coverage: bool = True
     ) -> List[Tuple[int, str, float, str]]:
-        """
-        Memilih top-ranked sentences dengan coverage-aware selection
-        
-        Args:
-            sentences (List[str]): Original sentences
-            scores (dict): Sentence scores dari PageRank
-            num_sentences (int): Jumlah kalimat yang diinginkan
-                                (jika None, gunakan ratio)
-            ratio (float): Rasio kalimat yang dipilih (default: 30%)
-            ensure_coverage (bool): Pastikan semua section terwakili (default: True)
-            
-        Returns:
-            List[Tuple[int, str, float, str]]: List of (index, sentence, score, position)
-                                               diurutkan berdasarkan posisi asli
-        """
+        # Pilih top-N kalimat berdasarkan score PageRank
+        # ensure_coverage = True: pastikan ada perwakilan dari awal, tengah, akhir teks
         # Tentukan jumlah kalimat yang akan dipilih
         if num_sentences is None:
             num_sentences = max(1, int(len(sentences) * ratio))
@@ -263,26 +145,13 @@ class TextRankSummarizer:
         return top_sentences
     
     def _get_position(self, idx: int, total: int) -> str:
-        """
-        Helper function untuk determine position category
-        
-        Args:
-            idx (int): Sentence index
-            total (int): Total sentences
-            
-        Returns:
-            str: 'Awal', 'Tengah', or 'Akhir'
-        """
+        # Helper: kasih label posisi kalimat (Awal/Tengah/Akhir) berdasarkan indeksnya
         if idx < total / 3:
             return 'Awal'
         elif idx < 2 * total / 3:
             return 'Tengah'
         else:
             return 'Akhir'
-    
-    # ========================================================================
-    # MAIN SUMMARIZATION FUNCTION
-    # ========================================================================
     
     def summarize(
         self, 
@@ -291,29 +160,8 @@ class TextRankSummarizer:
         num_sentences: Optional[int] = None,
         ratio: float = 0.3
     ) -> Dict:
-        """
-        Generate extractive summary menggunakan TextRank
-        
-        Args:
-            text (str): Input text (jika sentences belum di-tokenize)
-            sentences (List[str]): Pre-tokenized sentences
-            num_sentences (int): Jumlah kalimat dalam summary
-            ratio (float): Rasio summary (default: 30%)
-            
-        Returns:
-            dict: Dictionary berisi:
-                - summary: String summary
-                - sentences: List of (index, sentence, score, position)
-                - scores: Dictionary semua sentence scores
-                - num_sentences: Jumlah kalimat dalam summary
-                - compression_ratio: Rasio kompresi
-                
-        Example:
-            >>> summarizer = TextRankSummarizer()
-            >>> result = summarizer.summarize(text="Long text...", ratio=0.3)
-            >>> print(result['summary'])
-            >>> print(f"Compression: {result['compression_ratio']:.2%}")
-        """
+        # Fungsi utama: jalanin pipeline TextRank dari awal sampai akhir
+        # bisa terima raw text atau list kalimat yang udah di-tokenize
         # Import preprocessing di sini untuk avoid circular dependency
         from .preprocessing import TextPreprocessor
         
@@ -374,37 +222,19 @@ class TextRankSummarizer:
         return result
 
 
-# ============================================================================
-# CONVENIENCE FUNCTION
-# ============================================================================
-
+# Shortcut function — langsung return string summary tanpa perlu bikin object dulu
 def extractive_summary(
     text: Optional[str] = None,
     sentences: Optional[List[str]] = None,
     num_sentences: Optional[int] = None,
     ratio: float = 0.3
 ) -> str:
-    """
-    Fungsi convenience untuk generate extractive summary
-    
-    Args:
-        text (str): Input text
-        sentences (List[str]): Pre-tokenized sentences
-        num_sentences (int): Jumlah kalimat
-        ratio (float): Rasio summary
-        
-    Returns:
-        str: Summary text
-    """
     summarizer = TextRankSummarizer()
     result = summarizer.summarize(text, sentences, num_sentences, ratio)
     return result['summary']
 
 
-# ============================================================================
-# TESTING CODE
-# ============================================================================
-
+# Blok testing — jalan kalau file ini dirun langsung (bukan di-import)
 if __name__ == "__main__":
     print("="*80)
     print("EXTRACTIVE SUMMARIZATION (TextRank) - TEST")
