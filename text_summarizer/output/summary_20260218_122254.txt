@@ -1,0 +1,53 @@
+================================================================================
+TEXT SUMMARIZATION RESULTS
+================================================================================
+
+📄 ORIGINAL TEXT:
+--------------------------------------------------------------------------------
+Biografi Thorfinn Karlsefni:Perjalanan Menuju Kedamaian Sejati
+Thorfinn Karlsefnibukansekadarkarakterfiksibiasa;iaadalahrepresentasidariperjuangan
+manusiamelawantrauma,dendam,danpencarianmaknahidupditengahkekejamandunia
+Viking.Lahirdi Islandiasebagaiputradari Thors Snoresson,seorangpejuanglegendarisyang
+membelotdari Jomsvikingdemikehidupandamai,masakecil Thorfinndiwarnaidengan
+kehangatankeluarga.Namun,dunia Thorfinnhancurseketikasaatiamenyaksikanayahnya
+dibunuhsecaralicikolehkelompoktentarabayaranpimpinan Askeladddi Kepulauan Faroe.
+Kejadiantragisinimenjadititikbalikyangmengubahbocahlugumenjadimonsteryanghaus
+akandarah.
+Selamalebihdarisatudekade,Thorfinnhidupdalambayang-bayangdendam.Iabergabung
+dengankelompok Askeladd,bukankarenaloyalitas,melainkandemisatutujuan:
+mendapatkanduelkehormatanuntukmembunuhpembunuhayahnya.Dibawahasuhan
+keras Askeladd,Thorfinnberkembangmenjadiprajurityangsangatefisiennamunhampa
+secaraemosional.Iamenghabiskanmasaremajanyadimedanperang Inggris,melakukan
+berbagaikekejamanhanyademikesempatanberduelyangselaluberakhirdengankekalahan.
+Dendamtelahmenjadibahanbakarsekaligusracunyangmembutakanmata Thorfinndari
+nilai-nilaikemanusiaanyangduludiajarkanolehayahnya.
+Kehancurantujuanhidup Thorfinnterjadisaat Askeladdtewasditangan Pangeran Canute,
+merampassatu-satunyaalasan Thorfinnuntuktetaphidup.Iapunjatuhkedalamlubang
+keputusasaandanakhirnyaberakhirsebagaibudakdiladangmilik Ketil.Difase"Farmland
+Arc"inilah,Thorfinnmengalamitransformasispiritualyangluarbiasa.Melalui
+persahabatannyadengan Einardanmimpi-mimpiburukyangmenghantuinyatentangorang-
+orangyangpernahiabunuh,Thorfinnmenyadaribahwakekerasanhanyamelahirkan
+lingkaransetanyangtakberujung.Iapunbersumpahuntuktidaklagimenggunakan
+kekerasankecualidalamkeadaanterdesakdanmemulaiperjalananuntukmenjadi"prajurit
+sejati"tanpapedang.
+Puncakdarievolusikarakter Thorfinnadalahlahirnyafilosofi"Ihavenoenemies"(Akutidak
+punyamusuh).Iamenyadaribahwamusuhyangsesungguhnyabukanlahoranglain,
+melainkanamarahdankebenciandidalamdirinyasendiri.Dengansemangatbaru,Thorfinn
+bertekaduntukberlayarmenujuarahbarat,mencarisebuahdaratanlegendarisbernama
+Vinland.Tujuannyabukanuntukmenaklukkan,melainkanuntukmembangunsebuah
+masyarakatbaruyangbebasdariperbudakandanpeperangan—sebuahtempatdimana
+pedangtidaklagidibutuhkan.Perjalanan Thorfinnadalahpengingatbahwapenebusandosa
+selalumungkinbagimerekayangberanimengakuikesalahanmasalaludanmemilihjalan
+kedamaian.
+
+📝 EXTRACTIVE SUMMARY (TextRank):
+--------------------------------------------------------------------------------
+Biografi Thorfinn KarlsefniPerjalanan Menuju Kedamaian Sejati Thorfinn Karlsefnibukansekadarkarakterfiksibiasaiaadalahrepresentasidariperjuangan manusiamelawantrauma,dendam,danpencarianmaknahidupditengahkekejamandunia Viking.Lahirdi Islandiasebagaiputradari Thors Snoresson,seorangpejuanglegendarisyang membelotdari Jomsvikingdemikehidupandamai,masakecil Thorfinndiwarnaidengan kehangatankeluarga.Namun,dunia Thorfinnhancurseketikasaatiamenyaksikanayahnya dibunuhsecaralicikolehkelompoktentarabayaranpimpinan Askeladddi Kepulauan Faroe.
+
+🤖 ABSTRACTIVE SUMMARY (Gemini AI):
+--------------------------------------------------------------------------------
+Thorfinn Karlsefni, seorang prajurit Viking yang awalnya didorong oleh dendam atas kematian ayahnya, mengalami transformasi spiritual setelah kematian pembunuh ayahnya, Askeladd, dan kemudian bertekad untuk membangun masyarakat damai di Vinland berdasarkan filosofi "Aku tidak punya musuh".
+
+================================================================================
+Generated: 2026-02-18 12:22:54
+Tool: Text Summarization - Member 1
