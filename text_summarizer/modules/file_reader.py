@@ -25,39 +25,25 @@ import re
 
 
 def fix_pdf_spacing(text: str) -> str:
-    """
-    Fix spacing issues in PDF extracted text where words concatenate without spaces.
-    Uses capitalization pattern to detect word boundaries.
-    
-    Args:
-        text (str): Raw text extracted from PDF
-        
-    Returns:
-        str: Text with proper spacing
-        
-    Example:
-        >>> fix_pdf_spacing("ThorfinnKarlsefniadalahpejuang")
-        "Thorfinn Karlsefni adalah pejuang"
-    """
-    # CLEANUP FIRST: Remove excessive spaces before single capital letters
-    # Pattern: " X " where X is single capital -> "X "
-    text = re.sub(r'\s([A-Z])\s', r'\1 ', text)
-    
-    # PATTERN 1: lowercase followed by uppercase (e.g., "manusiaViking" -> "manusia Viking")
+    # Fix teks PDF yang kata-katanya nempel tanpa spasi
+    # Deteksi batas kata dari pola huruf kapital/kecil
+
+    # PATTERN 1: huruf kecil langsung diikuti huruf kapital → sisipkan spasi
+    # contoh: "manusiaViking" → "manusia Viking"
     text = re.sub(r'([a-z])([A-Z])', r'\1 \2', text)
-    
-    # PATTERN 2: Multiple uppercase followed by lowercase (e.g., "VIKINGadalah" -> "VIKING adalah")
-    text = re.sub(r'([A-Z]+)([a-z])', r'\1 \2', text)
-    
-    # PATTERN 3: Number followed by letter (e.g., "2024Thorfinn" -> "2024 Thorfinn")
+
+    # PATTERN 2: 2+ huruf kapital diikuti huruf kecil → sisipkan spasi sebelum huruf kecil
+    # contoh: "VIKINGadalah" → "VIKING adalah"
+    # (bukan "Thorfinn" karena hanya 1 huruf kapital di awal)
+    text = re.sub(r'([A-Z]{2,})([a-z])', r'\1 \2', text)
+
+    # PATTERN 3: angka diikuti huruf atau sebaliknya
     text = re.sub(r'(\d)([a-zA-Z])', r'\1 \2', text)
-    
-    # PATTERN 4: Letter followed by number (e.g., "Thorfinn2024" -> "Thorfinn 2024")  
     text = re.sub(r'([a-zA-Z])(\d)', r'\1 \2', text)
-    
-    # Clean up multiple spaces aggressively
-    text = re.sub(r'\s+', ' ', text)
-    
+
+    # Bersihkan spasi berlebih
+    text = re.sub(r' +', ' ', text)
+
     return text.strip()
 
 
@@ -151,6 +137,10 @@ def read_pdf(file_path: str) -> Optional[str]:
                 
                 if not full_text.strip():
                     raise ValueError("Tidak ada teks yang bisa diekstrak dari PDF")
+                
+                # Fix spasi yang nempel (masalah umum di PDF extraction)
+                # Menggunakan regex pattern yang sudah diperbaiki di step sebelumnya
+                full_text = fix_pdf_spacing(full_text)
                 
                 # Log sukses
                 print(f"[OK] Berhasil membaca file PDF (pdfplumber): {file_path}")
