@@ -1,0 +1,72 @@
+================================================================================
+TEXT SUMMARIZATION RESULTS
+================================================================================
+
+📄 ORIGINAL TEXT:
+--------------------------------------------------------------------------------
+Biografi Thorfinn Karlsefni: Perjalanan Menuju Kedamaian Sejati Thorfinn
+Karlsefni bukan sekadar karakter fiksi biasa; ia adalah representasi dari
+perjuangan manusia melawan trauma, dendam, dan pencarian makna hidup di tengah
+kekejaman dunia Viking. Lahir di Islandia sebagai putra dari Thors Snoresson,
+seorang pejuang legendaris yang membelot dari Jomsviking demi kehidupan damai,
+masa kecil Thorfinn diwarnai dengan kehangatan keluarga. Namun, dunia Thorfinn
+hancur seketika saat ia menyaksikan ayahnya dibunuh secara licik oleh kelompok
+tentara bayaran pimpinan Askeladd di Kepulauan Faroe. Kejadian tragis ini
+menjadi titik balik yang mengubah bocah lugu menjadi monster yang haus akan
+darah. Selama lebih dari satu dekade, Thorfinn hidup dalam bayang-bayang dendam.
+Ia bergabung dengan kelompok Askeladd, bukan karena loyalitas, melainkan demi
+satu tujuan: mendapatkan duel kehormatan untuk membunuh pembunuh ayahnya. Di
+bawah asuhan keras Askeladd, Thorfinn berkembang menjadi prajurit yang sangat
+efisien namun hampa secara emosional. Ia menghabiskan masa remajanya di medan
+perang Inggris, melakukan berbagai kekejaman hanya demi kesempatan berduel yang
+selalu berakhir dengan kekalahan. Dendam telah menjadi bahan bakar sekaligus
+racun yang membutakan mata Thorfinn dari nilai-nilai kemanusiaan yang dulu
+diajarkan oleh ayahnya. Kehancuran tujuan hidup Thorfinn terjadi saat Askeladd
+tewas di tangan Pangeran Canute, merampas satu-satunya alasan Thorfinn untuk
+tetap hidup. Ia pun jatuh ke dalam lubang keputusasaan dan akhirnya berakhir
+sebagai budak di ladang milik Ketil. Di fase "Farmland Arc" inilah, Thorfinn
+mengalami transformasi spiritual yang luar biasa. Melalui persahabatannya dengan
+Einar dan mimpi-mimpi buruk yang menghantuinya tentang orang- orang yang pernah
+ia bunuh, Thorfinn menyadari bahwa kekerasan hanya melahirkan lingkaran setan
+yang tak berujung. Ia pun bersumpah untuk tidak lagi menggunakan kekerasan
+kecuali dalam keadaan terdesak dan memulai perjalanan untuk menjadi "prajurit
+sejati" tanpa pedang. Puncak dari evolusi karakter Thorfinn adalah lahirnya
+filosofi "I have no enemies" (Aku tidak punya musuh). Ia menyadari bahwa musuh
+yang sesungguhnya bukanlah orang lain, melainkan amarah dan kebencian di dalam
+dirinya sendiri. Dengan semangat baru, Thorfinn bertekad untuk berlayar menuju
+arah barat, mencari sebuah daratan legendaris bernama Vinland. Tujuannya bukan
+untuk menaklukkan, melainkan untuk membangun sebuah masyarakat baru yang bebas
+dari perbudakan dan peperangan—sebuah tempat di mana pedang tidak lagi
+dibutuhkan. Perjalanan Thorfinn adalah pengingat bahwa penebusan dosa selalu
+mungkin bagi mereka yang berani mengakui kesalahan masa lalu dan memilih jalan
+kedamaian.
+
+📝 EXTRACTIVE SUMMARY (TextRank):
+--------------------------------------------------------------------------------
+Biografi Thorfinn Karlsefni Perjalanan Menuju Kedamaian Sejati Thorfinn
+Karlsefni bukan sekadar karakter fiksi biasa ia adalah representasi dari
+perjuangan manusia melawan trauma, dendam, dan pencarian makna hidup di tengah
+kekejaman dunia Viking. Lahir di Islandia sebagai putra dari Thors Snoresson,
+seorang pejuang legendaris yang membelot dari Jomsviking demi kehidupan damai,
+masa kecil Thorfinn diwarnai dengan kehangatan keluarga. Namun, dunia Thorfinn
+hancur seketika saat ia menyaksikan ayahnya dibunuh secara licik oleh kelompok
+tentara bayaran pimpinan Askeladd di Kepulauan Faroe. Ia bergabung dengan
+kelompok Askeladd, bukan karena loyalitas, melainkan demi satu tujuan
+mendapatkan duel kehormatan untuk membunuh pembunuh ayahnya. Ia menghabiskan
+masa remajanya di medan perang Inggris, melakukan berbagai kekejaman hanya demi
+kesempatan berduel yang selalu berakhir dengan kekalahan. Kehancuran tujuan
+hidup Thorfinn terjadi saat Askeladd tewas di tangan Pangeran Canute, merampas
+satu-satunya alasan Thorfinn untuk tetap hidup. Melalui persahabatannya dengan
+Einar dan mimpi-mimpi buruk yang menghantuinya tentang orang- orang yang pernah
+ia bunuh, Thorfinn menyadari bahwa kekerasan hanya melahirkan lingkaran setan
+yang tak berujung. Tujuannya bukan untuk menaklukkan, melainkan untuk membangun
+sebuah masyarakat baru yang bebas dari perbudakan dan peperangansebuah tempat di
+mana pedang tidak lagi dibutuhkan.
+
+🤖 ABSTRACTIVE SUMMARY (Gemini AI):
+--------------------------------------------------------------------------------
+(Abstractive summary tidak tersedia)
+
+================================================================================
+Generated: 2026-02-18 18:10:07
+Tool: Text Summarization - Member 1

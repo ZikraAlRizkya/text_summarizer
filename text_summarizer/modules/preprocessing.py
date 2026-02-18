@@ -2,19 +2,19 @@
 ================================================================================
 PREPROCESSING MODULE
 ================================================================================
-Modul untuk membersihkan dan memproses teks sebelum summarization
+Bersihin teks. Dari raw jadi siap olah.
 
 Author: Member 1 - NLP & Backend Engineer
 Phase: 2 (Core Summarization)
 
 Features:
-    - Text cleaning (URL, email, special characters)
-    - Case normalization (lowercase)
-    - Tokenization (sentence & word)
-    - Stopword removal
+    - Text cleaning (ilangin URL, email, char aneh)
+    - Case normalization (jadiin lowercase)
+    - Tokenization (pecah kalimat & kata)
+    - Stopword removal (buang kata umum)
 
 Classes:
-    - TextPreprocessor: Class utama untuk preprocessing
+    - TextPreprocessor: Class buat preprocessing
 
 Usage:
     from modules.preprocessing import TextPreprocessor
@@ -49,9 +49,9 @@ except LookupError:
 
 class TextPreprocessor:
     """
-    Class untuk preprocessing teks
+    Class buat preprocessing
     
-    Menangani:
+    Nanganin:
         1. Text cleaning
         2. Tokenization
         3. Stopword removal
@@ -59,10 +59,10 @@ class TextPreprocessor:
     
     def __init__(self, language='english'):
         """
-        Inisialisasi preprocessor
+        Init class
         
         Args:
-            language (str): Bahasa untuk stopwords 
+            language (str): Bahasa buat stopwords 
                           Options: 'english', 'indonesian', 'id'
                           (default: 'english')
         """
@@ -72,7 +72,7 @@ class TextPreprocessor:
         
         self.language = language
         
-        # Load stopwords dari NLTK atau fallback ke manual list
+        # Load stopwords (NLTK atau fallback manual)
         try:
             self.stop_words = set(stopwords.words(language))
             print(f"   [OK] Loaded {len(self.stop_words)} {language} stopwords from NLTK")
@@ -87,10 +87,10 @@ class TextPreprocessor:
     
     def _get_indonesian_stopwords(self) -> set:
         """
-        Stopwords bahasa Indonesia (manual list)
+        List stopwords Indo (manual list)
         
         Returns:
-            set: Set of Indonesian stopwords
+            set: Set stopwords
         """
         # Comprehensive Indonesian stopwords
         indonesian_stops = [
@@ -130,13 +130,13 @@ class TextPreprocessor:
     
     def remove_urls(self, text: str) -> str:
         """
-        Menghapus URL dari teks
+        Buang URL.
         
         Args:
             text (str): Input text
             
         Returns:
-            str: Text tanpa URL
+            str: Text bersih
         """
         # Pattern untuk mendeteksi URL (http, https, www)
         url_pattern = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
@@ -144,13 +144,13 @@ class TextPreprocessor:
     
     def remove_emails(self, text: str) -> str:
         """
-        Menghapus alamat email dari teks
+        Buang email.
         
         Args:
             text (str): Input text
             
         Returns:
-            str: Text tanpa email
+            str: Text bersih
         """
         # Pattern untuk mendeteksi email
         email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -158,14 +158,14 @@ class TextPreprocessor:
     
     def fix_stuck_words(self, text: str) -> str:
         """
-        Fix kata yang nempel tanpa spasi, terutama dari hasil ekstraksi PDF.
-        Menggunakan pola CamelCase untuk deteksi batas kata.
+        Benerin kata nempel (biasanya dari PDF).
+        Pake CamelCase buat deteksi.
         
         Args:
-            text (str): Input text dengan kata yang mungkin nempel
+            text (str): Input text
             
         Returns:
-            str: Text dengan spasi yang sudah diperbaiki
+            str: Text udah bener spasinya
             
         Example:
             >>> preprocessor.fix_stuck_words("ThorfinnKarlsefni")
@@ -183,8 +183,8 @@ class TextPreprocessor:
     
     def fix_punctuation_spacing(self, text: str) -> str:
         """
-        Fix spasi setelah tanda baca jika nempel dengan huruf kapital berikutnya.
-        Penting untuk sentence tokenization yang akurat.
+        Kasih spasi abis titik biar kalimat kepisah bener.
+        Penting buat tokenizing.
         
         Example:
             >>> "Hello.World" -> "Hello. World"
@@ -195,14 +195,14 @@ class TextPreprocessor:
     
     def remove_special_chars(self, text: str, keep_punctuation=True) -> str:
         """
-        Menghapus karakter spesial (support Indonesian characters)
+        Buang char aneh-aneh (tapi keep tanda baca penting).
         
         Args:
             text (str): Input text
-            keep_punctuation (bool): Simpan tanda baca kalimat (. ! ? ,)
+            keep_punctuation (bool): Simpan tanda baca (. ! ? ,) buat kalimat
             
         Returns:
-            str: Text yang sudah dibersihkan
+            str: Text bersih
         """
         # STEP 1: Normalize Unicode whitespace variants ke regular space
         # Ini fix masalah non-breaking space (\u00A0), thin space (\u2009), dll
@@ -221,7 +221,7 @@ class TextPreprocessor:
         if keep_punctuation:
             # Simpan tanda baca untuk sentence structure
             # Support Indonesian characters (keep accented letters if any)
-            pattern = r'[^a-zA-Z0-9\s\.\!\?\,\-\'\"]'
+            pattern = r'[^a-zA-Z0-9\s\.\!\?\,\-\'\"\/]'
         else:
             # Hapus semua kecuali huruf dan angka
             pattern = r'[^a-zA-Z0-9\s]'
@@ -236,13 +236,13 @@ class TextPreprocessor:
     
     def normalize_whitespace(self, text: str) -> str:
         """
-        Normalisasi whitespace (hapus spasi berlebih)
+        Rapiin spasi (biar ga double).
         
         Args:
             text (str): Input text
             
         Returns:
-            str: Text dengan whitespace yang dinormalisasi
+            str: Text rapi
         """
         # Ganti multiple spaces dengan single space
         text = re.sub(r'\s+', ' ', text)
@@ -251,16 +251,16 @@ class TextPreprocessor:
     
     def clean_text(self, text: str) -> str:
         """
-        Pipeline lengkap untuk text cleaning
+        Pipeline pembersih utama.
         
         Proses:
-            0. Fix kata nempel (CamelCase dari PDF)
-            1. Hapus URL dan email
-            2. Hapus special characters (keep punctuation)
-            3. Normalize whitespace
+            0. Benerin kata nempel
+            1. Buang URL & email
+            2. Buang char aneh
+            3. Rapiin spasi
         
         Args:
-            text (str): Raw input text
+            text (str): Raw input
             
         Returns:
             str: Cleaned text
@@ -294,13 +294,13 @@ class TextPreprocessor:
     
     def tokenize_sentences(self, text: str) -> List[str]:
         """
-        Memecah teks menjadi kalimat-kalimat
+        Pecah jadi kalimat.
         
         Args:
             text (str): Input text
             
         Returns:
-            List[str]: List of sentences
+            List[str]: List kalimat
             
         Example:
             >>> processor = TextPreprocessor()
@@ -320,13 +320,13 @@ class TextPreprocessor:
     
     def tokenize_words(self, text: str) -> List[str]:
         """
-        Memecah teks menjadi kata-kata
+        Pecah jadi kata.
         
         Args:
             text (str): Input text
             
         Returns:
-            List[str]: List of words (lowercase)
+            List[str]: List kata (lowercase)
             
         Example:
             >>> processor = TextPreprocessor()
@@ -344,13 +344,13 @@ class TextPreprocessor:
     
     def remove_stopwords(self, words: List[str]) -> List[str]:
         """
-        Menghapus stopwords dari list kata
+        Buang kata umum (stopwords).
         
         Args:
-            words (List[str]): List of words
+            words (List[str]): List kata
             
         Returns:
-            List[str]: Filtered words (tanpa stopwords dan punctuation)
+            List[str]: List kata bersih
         """
         return [w for w in words if w not in self.stop_words and w not in string.punctuation]
     
@@ -360,36 +360,14 @@ class TextPreprocessor:
     
     def preprocess_text(self, text: str, remove_stops=False) -> Dict:
         """
-        Pipeline preprocessing lengkap
-        
-        Proses:
-            1. Clean text (URL, email, special chars)
-            2. Tokenize sentences
-            3. Tokenize words
-            4. (Optional) Remove stopwords
+        Jalanin semua proses cleaning & tokenizing.
         
         Args:
             text (str): Raw input text
-            remove_stops (bool): Apakah hapus stopwords atau tidak
+            remove_stops (bool): Buang stopwords?
             
         Returns:
-            dict: Dictionary berisi hasil preprocessing dengan keys:
-                - original_text: Teks asli
-                - cleaned_text: Teks yang sudah dibersihkan
-                - sentences: List kalimat
-                - words: List kata
-                - filtered_words: List kata (tanpa stopwords jika remove_stops=True)
-                - num_sentences: Jumlah kalimat
-                - num_words: Jumlah kata
-                - num_filtered_words: Jumlah kata setelah filter
-                
-        Example:
-            >>> processor = TextPreprocessor()
-            >>> result = processor.preprocess_text("AI is amazing! Visit ai.com")
-            >>> print(result['sentences'])
-            ['AI is amazing']
-            >>> print(result['num_words'])
-            3
+            dict: Hasil preprocessing (kalimat, kata, stats, dll)
         """
         # Step 1: Clean text
         cleaned_text = self.clean_text(text)
@@ -433,12 +411,12 @@ class TextPreprocessor:
 
 def preprocess_text(text: str, language='english', remove_stopwords=False) -> Dict:
     """
-    Fungsi convenience untuk preprocessing
+    Fungsi convenience biar gampang dipake.
     
     Args:
-        text (str): Raw input text
-        language (str): Bahasa untuk stopwords
-        remove_stopwords (bool): Hapus stopwords atau tidak
+        text (str): Raw input
+        language (str): Bahasa (english/indonesian)
+        remove_stopwords (bool): Buang stopwords?
         
     Returns:
         dict: Hasil preprocessing

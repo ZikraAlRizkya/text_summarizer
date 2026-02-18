@@ -62,11 +62,13 @@ class TextRankSummarizer:
         sentences: List[str], 
         scores: Dict[int, float], 
         num_sentences: Optional[int] = None,
-        ratio: float = 0.3,
-        ensure_coverage: bool = True
+        ratio: float = 0.4,
+        ensure_coverage: bool = True,
+        include_first_sentence: bool = True
     ) -> List[Tuple[int, str, float, str]]:
         # Pilih top-N kalimat berdasarkan score PageRank
         # ensure_coverage = True: pastikan ada perwakilan dari awal, tengah, akhir teks
+        # include_first_sentence = True: force ambil kalimat pertama (bagus buat berita/artikel)
         # Tentukan jumlah kalimat yang akan dipilih
         if num_sentences is None:
             num_sentences = max(1, int(len(sentences) * ratio))
@@ -100,7 +102,19 @@ class TextRankSummarizer:
                 section_scores.sort(key=lambda x: x[1], reverse=True)
                 
                 if section_scores:
-                    best_idx = section_scores[0][0]
+                    # Logic khusus buat section 'Awal': force ambil kalimat pertama kalau diminta
+                    if include_first_sentence and section_name == 'Awal' and 0 in indices:
+                        # Prioritaskan kalimat pertama jika ada di section Awal
+                        current_best_idx = section_scores[0][0]
+                        if current_best_idx != 0:
+                             # Cek score relative, kalau beda jauh banget mungkin keep best?
+                             # Tapi user minta flow, jadi prioritaskan 0.
+                             best_idx = 0
+                        else:
+                             best_idx = 0
+                    else:
+                        best_idx = section_scores[0][0]
+                    
                     selected.append((best_idx, sentences[best_idx], scores[best_idx], section_name))
                     remaining_quota -= 1
             
@@ -133,14 +147,78 @@ class TextRankSummarizer:
             # Ambil top N kalimat
             top_sentences = ranked_sentences[:num_sentences]
             
-            # Tambahkan position info
-            top_sentences = [
-                (idx, sent, score, self._get_position(idx, total_sentences))
-                for idx, sent, score in top_sentences
-            ]
+            # Kalau include_first_sentence=True dan kalimat pertama belum masuk
+            if include_first_sentence and num_sentences > 0:
+                has_first = any(s[0] == 0 for s in top_sentences)
+                if not has_first:
+                    # Cari kalimat pertama
+                    first_sentence_tuple = next((s for s in ranked_sentences if s[0] == 0), None)
+                    if first_sentence_tuple:
+                        # Remove yang paling bontot (terakhir di list hasil sort score)
+                        # Tapi cek dulu biar ga remove yang penting banget
+                        if len(top_sentences) > 0:
+                            top_sentences.pop()
+                        # Masukin kalimat pertama
+                        top_sentences.append(first_sentence_tuple)
             
-            # Sort by original position
-            top_sentences.sort(key=lambda x: x[0])
+        # REFERENTIAL CONTINUITY CHECK
+        # Cek kalo ada kalimat yang depannya "Hal ini", "Ini", "Itu" dll tapi kalimat sebelumnya ga ada
+        # List kata rujukan yang butuh konteks sebelumnya
+        ref_keywords = ["hal ini", "hal tersebut", "ini ", "itu ", "karena itu", "oleh karena itu", "maka ", "akibatnya", "namun,"]
+        
+        # Bikin set index yang udah kepilih biar gampang ngecek
+        selected_indices = {s[0] for s in top_sentences}
+        to_add = []
+        
+        # Reconstruct ranked_sentences for iteration (since it wasn't defined in this block)
+        ranked_sentences = [
+            (idx, sentences[idx], scores.get(idx, 0.0)) 
+            for idx in range(total_sentences)
+        ]
+        
+        for idx, sent, score in ranked_sentences: # Iterate all sentences to find the tuple data
+             if idx in selected_indices:
+                 # Cek apakah kalimat ini butuh pendamping
+                 lower_sent = sent.lower().strip()
+                 
+                 needs_context = any(lower_sent.startswith(k) for k in ref_keywords)
+                 
+                 if needs_context:
+                     prev_idx = idx - 1
+                     if prev_idx >= 0 and prev_idx not in selected_indices and prev_idx not in [x[0] for x in to_add]:
+                         # Cari tuple buat prev_idx
+                         prev_tuple = next((s for s in ranked_sentences if s[0] == prev_idx), None)
+                         if prev_tuple:
+                             # Masukkan sebagai tambahan (ga usah remove yang lain biar aman)
+                             to_add.append(prev_tuple)
+                             
+        # Gabungin hasil
+        top_sentences.extend(to_add)
+        
+        # Tambahkan position info (karena logic atas mungkin nambah tuple tanpa posisi)
+        # Tuple di ranked_sentences isinya (idx, sent, score). top_sentences butuh (idx, sent, score, pos)
+        
+        # Re-format all top_sentences to ensure they have position
+        final_top_sentences = []
+        for item in top_sentences:
+            # Item bisa berupa length 3 (from ranked) atau length 4 (from coverage selection)
+            idx, sent, score = item[0], item[1], item[2]
+            pos = self._get_position(idx, total_sentences)
+            final_top_sentences.append((idx, sent, score, pos))
+            
+        top_sentences = final_top_sentences
+        
+        # Sort by original position (index)
+        top_sentences.sort(key=lambda x: x[0])
+        
+        # Remove duplicates just in case
+        unique_top = []
+        seen_indices = set()
+        for item in top_sentences:
+            if item[0] not in seen_indices:
+                unique_top.append(item)
+                seen_indices.add(item[0])
+        top_sentences = unique_top
         
         return top_sentences
     
@@ -158,7 +236,7 @@ class TextRankSummarizer:
         text: Optional[str] = None,
         sentences: Optional[List[str]] = None,
         num_sentences: Optional[int] = None,
-        ratio: float = 0.3
+        ratio: float = 0.4
     ) -> Dict:
         # Fungsi utama: jalanin pipeline TextRank dari awal sampai akhir
         # bisa terima raw text atau list kalimat yang udah di-tokenize
@@ -199,7 +277,8 @@ class TextRankSummarizer:
         
         # STEP 4: Select top sentences (with coverage-aware selection)
         top_sentences = self.select_top_sentences(
-            sentences, scores, num_sentences, ratio
+            sentences, scores, num_sentences, ratio,
+            include_first_sentence=True
         )
         print(f"   [OK] Dipilih {len(top_sentences)} kalimat:")
         
@@ -227,7 +306,7 @@ def extractive_summary(
     text: Optional[str] = None,
     sentences: Optional[List[str]] = None,
     num_sentences: Optional[int] = None,
-    ratio: float = 0.3
+    ratio: float = 0.4
 ) -> str:
     summarizer = TextRankSummarizer()
     result = summarizer.summarize(text, sentences, num_sentences, ratio)

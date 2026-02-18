@@ -1,0 +1,76 @@
+================================================================================
+TEXT SUMMARIZATION RESULTS
+================================================================================
+
+📄 ORIGINAL TEXT:
+--------------------------------------------------------------------------------
+Gas Pol Penuhi Alat Kesehatan di Rumah Jakarta, 17 Januari 2023  Kementerian
+Kesehatan menargetkan layanan empat penyakit katastropik Jantung, Stroke,
+Ginjal, dan Kanker dapat dilakukan di seluruh rumah sakit Kabupaten/Kota di
+Indonesia. Mendukung upaya ini, secara bertahap dilakukan pemenuhan alat
+kesehatan di seluruh rumah sakit.  Sepanjang tahun 2022, layanan rujukan
+didorong agar dapat diakses oleh seluruh pasien di pelosok Indonesia dengan
+menyalurkan bantuan untuk pemenuhan alat kesehatan penyakit prioritas,
+pendampingan kateterisasi jantung dan bedah jantung terbuka.  Hasilnya, dana
+bantuan pemerintah telah disalurkan kepada 150 RSUD dan 25 RSUP di 34 provinsi
+untuk pemenuhan alat kesehatan penyakit prioritas.  “Di akhir tahun ada dana
+sebesar Rp.3,55 triliun, kita gunakan untuk memenuhi Alkes di RS daerah. Sampai
+saat ini, dana bantuan pemerintah 2022 ke 150 RSUD sudah tersalurkan 96,2%.
+Sementara bantuan pemerintah ke RS vertikal tersalurkan 100%,” sebut Jubir
+Kemenkes dr. Mohammad Syahril.  Upaya tersebut juga mendapatkan dukungan kerja
+sama dari 24 gubernur untuk mengembangkan RSUD sebagai jejaring layanan rujukan
+dengan rincian layanan jantung 24 provinsi, stroke di 13 provinsi, kanker di 12
+provinsi, dan uronefrologi di 7 provinsi.  Tak hanya itu, Kemenkes juga telah
+melakukan program pendampingan kateterisasi jantung di 37 RS dan stroke di 3 RS.
+Secara bertahap, ditargetkan sebanyak 50% kabupaten/kota memiliki alat kesehatan
+lengkap untuk 4 penyakit katastropik.  Alat kesehatan untuk pengobatan jantung
+dan stroke antara lain Echocardiography, CT-Scan, Cath lab, Set Kamar OK, IABP,
+Rotablator, IVUS-FFR, MRI, Mikroskop Neuro, Heart Lung Machine, dan OCT.
+Sementara untuk kanker terdiri dari Mammography, SPECT CT, Flowcytometer, IHK,
+Bronchoscopy, Brachiterapy, CUSA, LINAC, PET-CT, CT Simulator.  Ada pula alat
+kesehatan untuk uronefrologi adalah Set endourology, ESWL, C-Am, USG Doppler,
+Video Urodynamic, Laser Holmium, Automated Peritoneal Dialysis, PCNL, URS, dan
+Tissue typing.  Selain itu, dr. Syahril melanjutkan, pemerintah juga akan
+melengkapi alat kesehatan untuk kesehatan ibu dan anak, berupa mesin Anestesi,
+Patient Monitor, Ventilator, USG Fetomaternal, Inkubator Bayi, MALDI Tofs, Laser
+Ablation, HFOV, Mesin Nitrit Oxide, HFOT, dan HFNC.  Berita ini disiarkan oleh
+Biro Komunikasi dan Pelayanan Publik, Kementerian Kesehatan RI. Untuk informasi
+lebih lanjut dapat menghubungi nomor hotline Halo Kemenkes melalui nomor hotline
+1500-567, SMS 081281562620, faksimili (021) 5223002, 52921669, dan alamat email
+kontak@kemkes.go.id (NI).  Kepala Biro Komunikasi dan Pelayanan Publik  dr. Siti
+Nadia Tarmizi, M.Epid
+
+📝 EXTRACTIVE SUMMARY (TextRank):
+--------------------------------------------------------------------------------
+Gas Pol Penuhi Alat Kesehatan di Rumah Jakarta, 17 Januari 2023 Kementerian
+Kesehatan menargetkan layanan empat penyakit katastropik Jantung, Stroke,
+Ginjal, dan Kanker dapat dilakukan di seluruh rumah sakit Kabupaten/Kota di
+Indonesia. Mendukung upaya ini, secara bertahap dilakukan pemenuhan alat
+kesehatan di seluruh rumah sakit. Sepanjang tahun 2022, layanan rujukan didorong
+agar dapat diakses oleh seluruh pasien di pelosok Indonesia dengan menyalurkan
+bantuan untuk pemenuhan alat kesehatan penyakit prioritas, pendampingan
+kateterisasi jantung dan bedah jantung terbuka. Hasilnya, dana bantuan
+pemerintah telah disalurkan kepada 150 RSUD dan 25 RSUP di 34 provinsi untuk
+pemenuhan alat kesehatan penyakit prioritas. Tak hanya itu, Kemenkes juga telah
+melakukan program pendampingan kateterisasi jantung di 37 RS dan stroke di 3 RS.
+Ada pula alat kesehatan untuk uronefrologi adalah Set endourology, ESWL, C-Am,
+USG Doppler, Video Urodynamic, Laser Holmium, Automated Peritoneal Dialysis,
+PCNL, URS, dan Tissue typing.
+
+🤖 ABSTRACTIVE SUMMARY (Gemini AI):
+--------------------------------------------------------------------------------
+Kementerian Kesehatan menargetkan layanan empat penyakit katastropik (Jantung,
+Stroke, Ginjal, dan Kanker) dapat diakses di seluruh rumah sakit Kabupaten/Kota
+di Indonesia. Untuk mendukung target ini, Kemenkes secara bertahap melakukan
+pemenuhan alat kesehatan di rumah sakit. Sepanjang tahun 2022, dana bantuan
+pemerintah sebesar Rp 3,55 triliun telah disalurkan kepada 150 RSUD dan 25 RSUP
+di 34 provinsi untuk alat kesehatan penyakit prioritas. Upaya ini juga didukung
+kerja sama dengan 24 gubernur untuk mengembangkan RSUD sebagai jejaring layanan
+rujukan. Selain itu, Kemenkes telah melakukan program pendampingan kateterisasi
+jantung dan stroke di beberapa rumah sakit. Secara bertahap, ditargetkan 50
+kabupaten/kota memiliki alat kesehatan lengkap untuk empat penyakit katastropik,
+serta melengkapi alat kesehatan untuk kesehatan ibu dan anak.
+
+================================================================================
+Generated: 2026-02-18 18:01:37
+Tool: Text Summarization - Member 1

@@ -4,6 +4,7 @@
 import argparse
 import os
 import sys
+import textwrap
 from datetime import datetime
 
 # Add modules to path
@@ -41,22 +42,22 @@ def save_summary(original_text, extractive_summary, abstractive_summary, output_
     
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(output_file, 'w', encoding='utf-8-sig') as f:
         f.write("="*80 + "\n")
         f.write("TEXT SUMMARIZATION RESULTS\n")
         f.write("="*80 + "\n\n")
         
         f.write("📄 ORIGINAL TEXT:\n")
         f.write("-"*80 + "\n")
-        f.write(original_text + "\n\n")
+        f.write(textwrap.fill(original_text, width=80) + "\n\n")
         
         f.write("📝 EXTRACTIVE SUMMARY (TextRank):\n")
         f.write("-"*80 + "\n")
-        f.write(extractive_summary + "\n\n")
+        f.write(textwrap.fill(extractive_summary, width=80) + "\n\n")
         
         f.write("🤖 ABSTRACTIVE SUMMARY (Gemini AI):\n")
         f.write("-"*80 + "\n")
-        f.write(abstractive_summary + "\n\n")
+        f.write(textwrap.fill(abstractive_summary, width=80) + "\n\n")
         
         f.write("="*80 + "\n")
         f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
@@ -102,8 +103,8 @@ def main():
     parser.add_argument(
         '--ratio', 
         type=float, 
-        default=0.3, 
-        help='Rasio extractive summary (default: 0.3 = 30%%)'
+        default=0.4, 
+        help='Rasio extractive summary (default: 0.4 = 40%)'
     )
     
     parser.add_argument(
@@ -209,7 +210,7 @@ def main():
     try:
         abstractive_summarizer = GeminiSummarizer()
         abstractive_result = abstractive_summarizer.summarize(
-            text=text,
+            text=preprocessed['cleaned_text'],
             max_sentences=extractive_result['num_sentences'],
             style=args.style
         )
@@ -238,11 +239,11 @@ def main():
     
     # Extractive summary
     print_section("EXTRACTIVE SUMMARY (TextRank)")
-    print(extractive_summary)
+    print(textwrap.fill(extractive_summary, width=80))
     
     # Abstractive summary
     print_section("ABSTRACTIVE SUMMARY (Gemini AI)")
-    print(abstractive_summary)
+    print(textwrap.fill(abstractive_summary, width=80))
     
     # Statistics
     print_section("STATISTICS")

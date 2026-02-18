@@ -54,6 +54,8 @@ Instruksi:
 - Gunakan bahasa yang clear dan coherent
 - Jangan include detail yang tidak perlu
 - Maintain factual accuracy
+- Pastikan kalimat selalu lengkap dan diakhiri tanda titik (.)
+- Jangan biarkan output terpotong
 
 Teks yang akan dirangkum:
 {text}
@@ -81,7 +83,7 @@ Ringkasan:"""
             
             generation_config = genai.types.GenerationConfig(
                 temperature=temperature,
-                max_output_tokens=1024,
+                max_output_tokens=2048,
             )
             
             response = self.model.generate_content(
