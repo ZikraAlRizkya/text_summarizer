@@ -1,0 +1,53 @@
+================================================================================
+TEXT SUMMARIZATION RESULTS
+================================================================================
+
+📄 ORIGINAL TEXT:
+--------------------------------------------------------------------------------
+BiografiThorfinnKarlsefni:PerjalananMenujuKedamaianSejati
+ThorfinnKarlsefnibukansekadarkarakterfiksibiasa;iaadalahrepresentasidariperjuangan
+manusiamelawantrauma,dendam,danpencarianmaknahidupditengahkekejamandunia
+Viking.LahirdiIslandiasebagaiputradariThorsSnoresson,seorangpejuanglegendarisyang
+membelotdariJomsvikingdemikehidupandamai,masakecilThorfinndiwarnaidengan
+kehangatankeluarga.Namun,duniaThorfinnhancurseketikasaatiamenyaksikanayahnya
+dibunuhsecaralicikolehkelompoktentarabayaranpimpinanAskeladddiKepulauanFaroe.
+Kejadiantragisinimenjadititikbalikyangmengubahbocahlugumenjadimonsteryanghaus
+akandarah.
+Selamalebihdarisatudekade,Thorfinnhidupdalambayang-bayangdendam.Iabergabung
+dengankelompokAskeladd,bukankarenaloyalitas,melainkandemisatutujuan:
+mendapatkanduelkehormatanuntukmembunuhpembunuhayahnya.Dibawahasuhan
+kerasAskeladd,Thorfinnberkembangmenjadiprajurityangsangatefisiennamunhampa
+secaraemosional.IamenghabiskanmasaremajanyadimedanperangInggris,melakukan
+berbagaikekejamanhanyademikesempatanberduelyangselaluberakhirdengankekalahan.
+DendamtelahmenjadibahanbakarsekaligusracunyangmembutakanmataThorfinndari
+nilai-nilaikemanusiaanyangduludiajarkanolehayahnya.
+KehancurantujuanhidupThorfinnterjadisaatAskeladdtewasditanganPangeranCanute,
+merampassatu-satunyaalasanThorfinnuntuktetaphidup.Iapunjatuhkedalamlubang
+keputusasaandanakhirnyaberakhirsebagaibudakdiladangmilikKetil.Difase"Farmland
+Arc"inilah,Thorfinnmengalamitransformasispiritualyangluarbiasa.Melalui
+persahabatannyadenganEinardanmimpi-mimpiburukyangmenghantuinyatentangorang-
+orangyangpernahiabunuh,Thorfinnmenyadaribahwakekerasanhanyamelahirkan
+lingkaransetanyangtakberujung.Iapunbersumpahuntuktidaklagimenggunakan
+kekerasankecualidalamkeadaanterdesakdanmemulaiperjalananuntukmenjadi"prajurit
+sejati"tanpapedang.
+PuncakdarievolusikarakterThorfinnadalahlahirnyafilosofi"Ihavenoenemies"(Akutidak
+punyamusuh).Iamenyadaribahwamusuhyangsesungguhnyabukanlahoranglain,
+melainkanamarahdankebenciandidalamdirinyasendiri.Dengansemangatbaru,Thorfinn
+bertekaduntukberlayarmenujuarahbarat,mencarisebuahdaratanlegendarisbernama
+Vinland.Tujuannyabukanuntukmenaklukkan,melainkanuntukmembangunsebuah
+masyarakatbaruyangbebasdariperbudakandanpeperangan—sebuahtempatdimana
+pedangtidaklagidibutuhkan.PerjalananThorfinnadalahpengingatbahwapenebusandosa
+selalumungkinbagimerekayangberanimengakuikesalahanmasalaludanmemilihjalan
+kedamaian.
+
+📝 EXTRACTIVE SUMMARY (TextRank):
+--------------------------------------------------------------------------------
+BiografiThorfinnKarlsefniPerjalananMenujuKedamaianSejati ThorfinnKarlsefnibukansekadarkarakterfiksibiasaiaadalahrepresentasidariperjuangan manusiamelawantrauma,dendam,danpencarianmaknahidupditengahkekejamandunia Viking.LahirdiIslandiasebagaiputradariThorsSnoresson,seorangpejuanglegendarisyang membelotdariJomsvikingdemikehidupandamai,masakecilThorfinndiwarnaidengan kehangatankeluarga.Namun,duniaThorfinnhancurseketikasaatiamenyaksikanayahnya dibunuhsecaralicikolehkelompoktentarabayaranpimpinanAskeladddiKepulauanFaroe.
+
+🤖 ABSTRACTIVE SUMMARY (Gemini AI):
+--------------------------------------------------------------------------------
+Thorfinn Karlsefni, yang awalnya didorong oleh dendam atas pembunuhan ayahnya, mengalami transformasi mendalam dari prajurit haus darah menjadi pencari kedamaian yang bersumpah menolak kekerasan dan bertekad membangun masyarakat bebas perang di Vinland.
+
+================================================================================
+Generated: 2026-02-18 01:32:36
+Tool: Text Summarization - Member 1

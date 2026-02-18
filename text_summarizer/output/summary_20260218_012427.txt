@@ -1,0 +1,24 @@
+================================================================================
+TEXT SUMMARIZATION RESULTS
+================================================================================
+
+📄 ORIGINAL TEXT:
+--------------------------------------------------------------------------------
+The landscape of professional football has undergone a radical transformation over the last two decades, shifting from a game of rigid positions to one of fluid systems and high-intensity pressing. In the past, the traditional 4-4-2 formation dominated the sport, relying on clear roles for wingers and two strikers. However, the arrival of managers like Pep Guardiola and Jürgen Klopp introduced concepts that prioritized spatial control and collective movement over individual positioning. The "Tiki-Taka" style, characterized by short passing and constant movement, forced opponents to rethink how they defend without the ball.
+
+One of the most significant tactical shifts is the emergence of the "False 9." Instead of a traditional powerhouse striker staying in the box, the False 9 drops deep into the midfield, dragging central defenders out of position and creating gaps for late-running wingers or attacking midfielders. This tactical flexibility is often paired with "Gegenpressing," a German philosophy where the team immediately tries to regain possession after losing the ball, rather than retreating into a defensive shape. This high-risk, high-reward approach requires elite levels of physical fitness and tactical discipline from every player on the pitch.
+
+Furthermore, the integration of Data Science has revolutionized how these tactics are developed and executed. Analysts now use Expected Goals (xG), heat maps, and passing networks to identify weaknesses in the opposition's structure. Recruitment is no longer just about scouting talent; it is about finding players who fit a specific tactical profile determined by algorithmic models. As football continues to evolve, the bridge between technical coaching and data-driven analysis becomes shorter, turning the beautiful game into a high-speed chess match played on a grass field.
+
+
+📝 EXTRACTIVE SUMMARY (TextRank):
+--------------------------------------------------------------------------------
+The landscape of professional football has undergone a radical transformation over the last two decades, shifting from a game of rigid positions to one of fluid systems and high-intensity pressing. One of the most significant tactical shifts is the emergence of the "False 9." Analysts now use Expected Goals xG , heat maps, and passing networks to identify weaknesses in the opposition's structure.
+
+🤖 ABSTRACTIVE SUMMARY (Gemini AI):
+--------------------------------------------------------------------------------
+Profesional sepak bola telah mengalami transformasi radikal dari formasi kaku menjadi sistem yang lebih cair, menekankan kontrol spasial dan *pressing* intensitas tinggi. Inovasi taktis seperti "False 9" yang menarik bek lawan dan "Gegenpressing" untuk merebut bola kembali dengan cepat kini menjadi kunci, menuntut kebugaran dan disiplin tinggi. Selain itu, *Data Science* merevolusi pengembangan taktik dan rekrutmen pemain melalui analisis seperti *Expected Goals* (xG) dan model algoritmik.
+
+================================================================================
+Generated: 2026-02-18 01:24:27
+Tool: Text Summarization - Member 1

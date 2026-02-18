@@ -1,0 +1,28 @@
+================================================================================
+TEXT SUMMARIZATION RESULTS
+================================================================================
+
+📄 ORIGINAL TEXT:
+--------------------------------------------------------------------------------
+Kecerdasan Buatan atau Artificial Intelligence (AI) telah merevolusi cara kita berinteraksi dengan teknologi. Dari asisten virtual hingga kendaraan otonom, AI mengubah berbagai industri. Machine learning, sebagai bagian dari AI, memungkinkan sistem untuk belajar dari data dan meningkat seiring waktu tanpa diprogram secara eksplisit.
+
+Deep learning, yang menggunakan jaringan saraf dengan banyak lapisan, telah mencapai hasil yang luar biasa dalam pengenalan gambar, pemrosesan bahasa alami, dan permainan. Jaringan saraf ini terinspirasi oleh struktur dan fungsi otak manusia, terdiri dari node yang saling terhubung yang memproses informasi.
+
+Seiring AI terus berkembang, hal ini menimbulkan pertanyaan penting tentang etika, privasi, dan masa depan pekerjaan. Otomasi yang didukung AI dapat menyebabkan perubahan signifikan di pasar tenaga kerja, mengharuskan pekerja mengembangkan keterampilan baru. Selain itu, kekhawatiran tentang privasi data dan bias algoritma perlu diatasi untuk memastikan sistem AI adil dan transparan.
+
+Potensi aplikasi AI sangat luas dan terus berkembang. Dalam bidang kesehatan, AI membantu mendiagnosis penyakit dan mengembangkan rencana perawatan yang dipersonalisasi. Di bidang keuangan, AI membantu mendeteksi penipuan dan membuat keputusan investasi. Dalam transportasi, mobil self-driving menjanjikan untuk mengurangi kecelakaan dan meningkatkan aliran lalu lintas.
+
+Terlepas dari tantangannya, masa depan AI terlihat menjanjikan. Peneliti dan pengembang di seluruh dunia bekerja untuk menciptakan sistem AI yang lebih canggih, efisien, dan etis. Saat kita bergerak maju, sangat penting untuk mencapai keseimbangan antara inovasi dan tanggung jawab, memastikan bahwa AI menguntungkan seluruh umat manusia.
+
+
+📝 EXTRACTIVE SUMMARY (TextRank):
+--------------------------------------------------------------------------------
+Seiring AI terus berkembang, hal ini menimbulkan pertanyaan penting tentang etika, privasi, dan masa depan pekerjaan. Selain itu, kekhawatiran tentang privasi data dan bias algoritma perlu diatasi untuk memastikan sistem AI adil dan transparan. Dalam bidang kesehatan, AI membantu mendiagnosis penyakit dan mengembangkan rencana perawatan yang dipersonalisasi. Peneliti dan pengembang di seluruh dunia bekerja untuk menciptakan sistem AI yang lebih canggih, efisien, dan etis.
+
+🤖 ABSTRACTIVE SUMMARY (Gemini AI):
+--------------------------------------------------------------------------------
+(Abstractive summary tidak tersedia)
+
+================================================================================
+Generated: 2026-02-18 00:31:45
+Tool: Text Summarization - Member 1
