@@ -118,36 +118,37 @@ def read_pdf(file_path: str) -> Optional[str]:
         if not file_path.endswith('.pdf'):
             raise ValueError("File harus berformat .pdf")
         
-        # SOLUSI 3: Try pdfplumber first (more reliable)
         try:
-            import pdfplumber
+            import fitz  # PyMuPDF
             
-            with pdfplumber.open(file_path) as pdf:
-                if len(pdf.pages) == 0:
-                    raise ValueError("PDF tidak memiliki halaman")
-                
-                # Extract text from all pages
-                text_content = []
-                for page in pdf.pages:
-                    page_text = page.extract_text()
-                    if page_text:
-                        text_content.append(page_text)
-                
-                full_text = "\n".join(text_content)
-                
-                if not full_text.strip():
-                    raise ValueError("Tidak ada teks yang bisa diekstrak dari PDF")
-                
-                # Fix spasi yang nempel (masalah umum di PDF extraction)
-                # Menggunakan regex pattern yang sudah diperbaiki di step sebelumnya
-                full_text = fix_pdf_spacing(full_text)
-                
-                # Log sukses
-                print(f"[OK] Berhasil membaca file PDF (pdfplumber): {file_path}")
-                print(f" Total halaman: {len(pdf.pages)}")
-                print(f" Panjang konten: {len(full_text)} karakter")
-                
-                return full_text
+            doc = fitz.open(file_path)
+            if len(doc) == 0:
+                raise ValueError("PDF tidak memiliki halaman")
+            
+            text_content = []
+            for page in doc:
+                # get_text("text") usually preserves whitespace better than other libs
+                # It handles layout analysis to insert spaces where appropriate
+                page_text = page.get_text("text")
+                if page_text:
+                    text_content.append(page_text)
+            
+            full_text = "\n".join(text_content)
+            num_pages = len(doc)
+            doc.close()
+            
+            if not full_text.strip():
+                raise ValueError("Tidak ada teks yang bisa diekstrak dari PDF")
+            
+            # Tetap jalankan fix_pdf_spacing preventif untuk kasus layout yang sangat rapat
+            full_text = fix_pdf_spacing(full_text)
+            
+            # Log sukses
+            print(f"[OK] Berhasil membaca file PDF (PyMuPDF/fitz): {file_path}")
+            print(f" Total halaman: {num_pages}")
+            print(f" Panjang konten: {len(full_text)} karakter")
+            
+            return full_text
                 
         except ImportError:
             # Fallback to PyPDF2 if pdfplumber not available

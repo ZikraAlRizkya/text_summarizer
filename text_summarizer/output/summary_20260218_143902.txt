@@ -1,0 +1,46 @@
+================================================================================
+TEXT SUMMARIZATION RESULTS
+================================================================================
+
+📄 ORIGINAL TEXT:
+--------------------------------------------------------------------------------
+Kung Fu Panda: Perjalanan Sang Pendekar Mie Menjadi Prajurit Naga 
+Kisah Kung Fu Panda berpusat pada seekor panda raksasa yang gemuk dan canggung 
+bernama Po, yang menghabiskan hari-harinya bekerja di kedai mie milik ayahnya, Mr. Ping, 
+sambil terus memimpikan kehidupan sebagai master kung fu yang hebat meskipun ia 
+menyadari bahwa bentuk fisiknya jauh dari standar seorang pejuang. Takdir Po berubah 
+secara dramatis ketika ia secara tidak sengaja "terpilih" oleh Master Oogway sebagai Prajurit 
+Naga yang legendaris dalam sebuah upacara pemilihan, sebuah keputusan yang memicu 
+keraguan besar serta rasa frustrasi dari Master Shifu dan anggota Furious Five—Tigress, 
+Crane, Mantis, Viper, dan Monkey—yang telah berlatih dengan disiplin tinggi selama 
+bertahun-tahun. 
+Di bawah asuhan Shifu yang awalnya skeptis dan keras, Po harus menghadapi kerasnya 
+latihan fisik serta intimidasi mental sambil menyadari bahwa musuh besar bernama Tai Lung 
+telah melarikan diri dari penjara Chorh-Gom yang super ketat dan sedang menuju Lembah 
+Damai untuk merebut Gulungan Naga. Pelatihan Po mencapai titik balik ketika Shifu 
+menyadari bahwa motivasi terbesar Po adalah makanan, sehingga ia mulai menggunakan 
+metode pelatihan unik yang disesuaikan dengan karakteristik alami Po, yang akhirnya 
+berhasil mengasah kemampuan bela diri sang panda hingga ke level yang tidak terduga oleh 
+siapapun sebelumnya. 
+Ketegangan mencapai puncaknya ketika Po akhirnya membuka Gulungan Naga yang sangat 
+dicari, namun ia hanya menemukan permukaan emas yang kosong dan memantulkan 
+bayangan dirinya sendiri, sebuah wahyu yang awalnya membingungkan namun kemudian 
+memberinya pemahaman mendalam melalui wejangan ayahnya tentang "rahasia sup mie" 
+bahwa tidak ada bahan rahasia dalam kekuatan sejati selain kepercayaan penuh pada diri 
+sendiri. Dengan pemahaman baru ini, Po berhasil menghadapi Tai Lung dalam pertempuran 
+epik yang menggabungkan teknik kung fu yang disiplin dengan gaya bertarung panda yang 
+jenaka, hingga akhirnya menggunakan teknik Wuxi Finger Hold yang legendaris untuk 
+mengalahkan Tai Lung, menyelamatkan Lembah Damai, dan membuktikan bahwa pahlawan 
+sejati bisa datang dari latar belakang yang paling sederhana sekalipun.
+
+📝 EXTRACTIVE SUMMARY (TextRank):
+--------------------------------------------------------------------------------
+Kung Fu Panda Perjalanan Sang Pendekar Mie Menjadi Prajurit Naga Kisah Kung Fu Panda berpusat pada seekor panda raksasa yang gemuk dan canggung bernama Po, yang menghabiskan hari-harinya bekerja di kedai mie milik ayahnya, Mr. Ping, sambil terus memimpikan kehidupan sebagai master kung fu yang hebat meskipun ia menyadari bahwa bentuk fisiknya jauh dari standar seorang pejuang. Di bawah asuhan Shifu yang awalnya skeptis dan keras, Po harus menghadapi kerasnya latihan fisik serta intimidasi mental sambil menyadari bahwa musuh besar bernama Tai Lung telah melarikan diri dari penjara Chorh-Gom yang super ketat dan sedang menuju Lembah Damai untuk merebut Gulungan Naga. Dengan pemahaman baru ini, Po berhasil menghadapi Tai Lung dalam pertempuran epik yang menggabungkan teknik kung fu yang disiplin dengan gaya bertarung panda yang jenaka, hingga akhirnya menggunakan teknik Wuxi Finger Hold yang legendaris untuk mengalahkan Tai Lung, menyelamatkan Lembah Damai, dan membuktikan bahwa pahlawan sejati bisa datang dari latar belakang yang paling sederhana sekalipun.
+
+🤖 ABSTRACTIVE SUMMARY (Gemini AI):
+--------------------------------------------------------------------------------
+Po, seekor panda gemuk yang bermimpi menjadi master kung fu, secara tak terduga terpilih sebagai Prajurit Naga oleh Master Oogway, memicu keraguan dari Master Shifu dan Furious Five. Di bawah bimbingan Shifu yang kemudian menyesuaikan metode latihannya dengan motivasi Po terhadap makanan, Po berlatih keras untuk menghadapi Tai Lung yang telah melarikan diri dan mengancam Lembah Damai. Akhirnya, Po menemukan bahwa rahasia kekuatan sejati adalah kepercayaan diri, yang membantunya mengalahkan Tai Lung dalam pertempuran epik dan membuktikan bahwa pahlawan bisa datang dari latar belakang yang paling sederhana sekalipun.
+
+================================================================================
+Generated: 2026-02-18 14:39:02
+Tool: Text Summarization - Member 1
