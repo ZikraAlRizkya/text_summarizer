@@ -181,6 +181,18 @@ class TextPreprocessor:
         
         return fixed_text
     
+    def fix_punctuation_spacing(self, text: str) -> str:
+        """
+        Fix spasi setelah tanda baca jika nempel dengan huruf kapital berikutnya.
+        Penting untuk sentence tokenization yang akurat.
+        
+        Example:
+            >>> "Hello.World" -> "Hello. World"
+        """
+        # Pisahkan titik/tanda tanya/tanda seru dengan huruf kapital berikutnya
+        fixed_text = re.sub(r'([.?!])([A-Z])', r'\1 \2', text)
+        return fixed_text
+    
     def remove_special_chars(self, text: str, keep_punctuation=True) -> str:
         """
         Menghapus karakter spesial (support Indonesian characters)
@@ -259,6 +271,9 @@ class TextPreprocessor:
         # Step 0: Fix kata nempel dulu SEBELUM cleaning lain
         # Ini penting untuk PDF yang tidak punya spasi antar kata
         text = self.fix_stuck_words(text)
+        
+        # Step 0.5: Fix spasi setelah tanda baca
+        text = self.fix_punctuation_spacing(text)
         
         # Step 1: Hapus URL dan email
         text = self.remove_urls(text)
