@@ -1,0 +1,44 @@
+# Environment
+venv/
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.py[cod]
+*$py.class
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Output
+output/*
+!output/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Distribution
+dist/
+build/
+*.egg-info/
+
+# Markdown docs (tidak perlu di-push ke GitHub tim)
+*.md
+
+# Debug & utility scripts (tidak perlu di-push)
+test_gemini_api.py
+fix_emojis.py
